@@ -12,6 +12,335 @@ DIAGRAM OF MATLINK program?
 CONTACT INFORMATION
 
 # REdCAP Training Resouces
+
+##MATLINK-specific REDCap resources:
+Here is the content converted into GitHub Markdown:
+
+```markdown
+# PILLARS IMPROVEMENT SUGGESTION DOCUMENT: REDCap Instruments (ALL) General Notes Updated 4/17/24
+
+## Issue: Site-Specific Variable Collection
+
+### Description
+Variables designated “Site-Specific” mean the data from the variable is stored in an extracted schema but sites have the ability to abstract the information if extraction is not an option. These fields appear in our REDCap instruments as variables but are generally unpopulated with information. If sites take an abstraction approach for site-specific variables they are expected to integrate their abstracted responses into the associated extracted schemas and submit the total data submission of extracted and abstracted site-specific variables as an XML. Abstracted site-specific fields are left off the standard reports from the sites’ REDCap submissions used to populate our SQL tables of the data from the abstracted instrument. This leaves the following concerns:
+- One REDCap Instrument may have site-specific variables from many extracted schemas (Example: Delivery and Hospitalization REDCap Instrument hold site-specific variables from 7 total extracted schemas). Spreading this information further across multiple extracted schemas has complicated data quality evaluation and made it difficult to track harmonization between the field in REDCap if a change is made to its extracted counterpart.
+- Some site-specific variables don’t fully match their extracted primary field in structure (Example: Child Follow-up Dental Care. The abstracted variable is a y/n report if the child has ever received dental care and the extracted variable is presented as a dental referral in the specialist referral schema).
+- Some site-specific variables (which have been removed from REDCap standard export reports) are critical structure variables to make sense of the REDCap instrument.
+
+### Proposed/Suggested Changes
+GENERAL NOTE: We would like site-specific variables evaluated with sites to determine whether or not extraction is possible. We would like sites to attempt to extract these fields if at all possible for consistency in reporting and site resources.
+
+#### CONCERN #1: Non-Matching Instruments for Site-Specific Variables
+- If a variable or set of variables needs to remain site-specific our first recommendation would be to separate out site-specific variables into unique instruments with corresponding names of extracted schema counterparts (e.g., Move all Site-Specific Variables for Maternal L&D into a REDCap Maternal L&D instrument containing only site-specific variables corresponding to this site-specific instrument). We would not request export of these instruments to populate tables on our end but would create more clear workflows.
+- If we cannot do the above suggestion, could we integrate corresponding extracted schema into REDCap Variable Name.
+
+#### CONCERN #2: Non-Matching Site-Specific Fields
+- The above suggestion to separate site-specific fields into their own instruments within REDCap would help track synchronization of site-specific variables.
+- If it is determined that these fields truly collect different information, a decision needs to be made about whether to change the REDCap field to abstraction only and consider the variable a different/complimentary variable or whether the format of the REDCap variable needs to be adjusted to match the extracted field.
+
+#### CONCERN #3: Site-Specific Variables that are Structural
+- The problem with simply adding these site-specific variables to the standard report so we can receive them on our end to better assess data quality of the REDCap abstraction only variables is that sites may be extracting these fields meaning we won’t always capture these in the REDCap.
+- In most cases, what is needed is to add a ‘structural field’ to the REDCap instrument and include it as a part of the standard report and a required variable.
+
+## Issue: Instrument/Form Eligibility
+
+### Description
+We are having a difficult time making sense of data completeness in REDCap instruments because “eligibility” to complete a certain form or instrument is based on the following items (may be other fields not yet considered):
+- If the dyad was sampled for abstraction (In the first cohort, all persons on a medication for opioid use disorder (MOUD) were abstracted but only a sample of the comparison group were expected to be abstracted)
+- Certain types of pregnancy outcomes: for example, most delivery information we would expect for only-live births while other we would expect to be reported for some non-live births but maybe not all
+
+### Proposed/Suggested Changes
+- If we separate some of these into sub-instruments it would be easier to narrow down eligibility for smaller chunks of variables.
+- If possible, it would be helpful to have an “eligibility form” in REDCap and use this to branch which forms are available for the dyad based on their responses within this form. Then we could require this form to be filled out for all dyads but easily use this to assess data quality/loss to follow-up without asking sites to report non-reported for all instruments they do not apply to.
+
+## Issue: Missing Categories
+
+### Description
+Currently, the options for reason for missing are as follows:
+- 999
+- 999.9
+- 999.99
+- 9999.99
+- 12-31-2012
+- EXT
+- 997
+
+This has created chaos because options cannot be specified based on specific field or field type.
+
+### Proposed/Suggested Changes
+- We would like to change this to only one option (999) and where we would want to give the option to indicate 997 (N/A) make this a response field.
+- OR integrate a “not applicable” button or response option into the selected variables where we would clearly want those who are not eligible for the question to indicate so.
+
+## Issue: Dates
+
+### Description
+Generally, dates are currently being entered as a text field with a validation of date format. We seem to be getting various formats reading as text and are unsure if there is anything we can do about this. Also, there is not a great way to indicate no-date is available.
+
+### Proposed/Suggested Changes
+- If changes need to be made to ensure consistent format, we would like these changes made.
+- It would be great to embed a “no-date available” in these questions.
+
+## Issue: REDCap Variable Names
+
+### Description
+Some of the column names from the REDCap standard report are longer than 25 characters keeping them from uploading into SAS without a manual adjustment.
+
+### Proposed/Suggested Changes
+- If possible, can we adjust these column names to be distinct at 25 characters or less?
+
+## Issue: Matching Data Between Various REDCap Versions
+
+### Description
+Depending on how changes are implemented, we may need support from JHU to ensure data collected under different instruments is compatible to be used together in analysis.
+
+### Proposed/Suggested Changes
+- What processes can we implement to ensure operability between versions?
+
+## Issue: Dyad IDs - Dropping Leading Zeros
+
+### Description
+Some sites dropped the leading zero of the dyad id (1 vs. 01; The dyad id containing numbers and letters is a string/text field).
+
+### Proposed/Suggested Changes
+- Madhu's suggestion is to have sites export and re-generate all records where this has occurred so the record id is correct (contains the leading zero).
+
+Note: This approach would require that after making these adjustments ALL REDCap instrument submissions would need to be resubmitted. We are open to suggestions for how to best handle this in REDCap as it seems that once a record id is set it cannot be updated.
+
+## Issue: Dyad IDs
+
+### Description
+Currently, the dyad id column exports in REDCap instruments as “dyad_id” while it reads extracted schemas as “dyadid”.
+
+### Proposed/Suggested Changes
+- If we can fix the formatting (as described above), can we rename these columns to match the extracted schemas for matching/merging?
+
+ALTERNATIVELY, we can do this with a table (see below)
+Sure, here's the content formatted in a table using GitHub Markdown:
+
+```markdown
+# PILLARS IMPROVEMENT SUGGESTION DOCUMENT: REDCap Instruments (ALL) General Notes Updated 4/17/24
+
+| Issue                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Proposed/Suggested Changes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Site-Specific Variable Collection               | Variables designated “Site-Specific” mean the data from the variable is stored in an extracted schema but sites have the ability to abstract the information if extraction is not an option. These fields appear in our REDCap instruments as variables but are generally unpopulated with information. If sites take an abstraction approach for site-specific variables they are expected to integrate their abstracted responses into the associated extracted schemas and submit the total data submission of extracted and abstracted site-specific variables as an XML. Abstracted site-specific fields are left off the standard reports from the sites’ REDCap submissions used to populate our SQL tables of the data from the abstracted instrument. This leaves the following concerns: One REDCap Instrument may have site-specific variables from many extracted schemas (Example: Delivery and Hospitalization REDCap Instrument hold site-specific variables from 7 total extracted schemas). Spreading this information further across multiple extracted schemas has complicated data quality evaluation and made it difficult to track harmonization between the field in REDCap if a change is made to its extracted counterpart. Some site-specific variables don’t fully match their extracted primary field in structure (Example: Child Follow-up Dental Care. The abstracted variable is a y/n report if the child has ever received dental care and the extracted variable is presented as a dental referral in the specialist referral schema). Some site-specific variables (which have been removed from REDCap standard export reports) are critical structure variables to make sense of the REDCap instrument. | GENERAL NOTE: We would like site-specific variables evaluated with sites to determine whether or not extraction is possible. We would like sites to attempt to extract these fields if at all possible for consistency in reporting and site resources. <br> <br> CONCERN #1: Non-Matching Instruments for Site-Specific Variables: <br> - If a variable or set of variables needs to remain site-specific our first recommendation would be to separate out site-specific variables into unique instruments with corresponding names of extracted schema counterparts (e.g., Move all Site-Specific Variables for Maternal L&D into a REDCap Maternal L&D instrument containing only site-specific variables corresponding to this site-specific instrument). We would not request export of these instruments to populate tables on our end but would create more clear workflows. <br> - If we cannot do the above suggestion, could we integrate corresponding extracted schema into REDCap Variable Name. <br> <br> CONCERN #2: Non-Matching Site-Specific Fields: <br> - The above suggestion to separate site-specific fields into their own instruments within REDCap would help track synchronization of site-specific variables. <br> - If it is determined that these fields truly collect different information, a decision needs to be made about whether to change the REDCap field to abstraction only and consider the variable a different/complimentary variable or whether the format of the REDCap variable needs to be adjusted to match the extracted field. <br> <br> CONCERN #3: Site-Specific Variables that are Structural: <br> - The problem with simply adding these site-specific variables to the standard report so we can receive them on our end to better assess data quality of the REDCap abstraction only variables is that sites may be extracting these fields meaning we won’t always capture these in the REDCap. <br> - In most cases, what is needed is to add a ‘structural field’ to the REDCap instrument and include it as a part of the standard report and a required variable. |
+| Instrument/Form Eligibility                     | We are having a difficult time making sense of data completeness in REDCap instruments because “eligibility” to complete a certain form or instrument is based on the following items (may be other fields not yet considered): <br> - If the dyad was sampled for abstraction (In the first cohort, all persons on a medication for opioid use disorder (MOUD) were abstracted but only a sample of the comparison group were expected to be abstracted) <br> - Certain types of pregnancy outcomes: for example, most delivery information we would expect for only-live births while other we would expect to be reported for some non-live births but maybe not all                                                                                                                                                                                                                                                                | - If we separate some of these into sub-instruments it would be easier to narrow down eligibility for smaller chunks of variables. <br> - If possible, it would be helpful to have an “eligibility form” in REDCap and use this to branch which forms are available for the dyad based on their responses within this form. Then we could require this form to be filled out for all dyads but easily use this to assess data quality/loss to follow-up without asking sites to report non-reported for all instruments they do not apply to.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Missing Categories                              | Currently, the options for reason for missing are as follows: <br> - 999 <br> - 999.9 <br> - 999.99 <br> - 9999.99 <br> - 12-31-2012 <br> - EXT <br> - 997 <br> <br> This has created chaos because options cannot be specified based on specific field or field type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | - We would like to change this to only one option (999) and where we would want to give the option to indicate 997 (N/A) make this a response field. <br> - OR integrate a “not applicable” button or response option into the selected variables where we would clearly want those who are not eligible for the question to indicate so.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Dates                                           | Generally, dates are currently being entered as a text field with a validation of date format. We seem to be getting various formats reading as text and are unsure if there is anything we can do about this. Also, there is not a great way to indicate no-date is available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | - If changes need to be made to ensure consistent format, we would like these changes made. <br> - It would be great to embed a “no-date available” in these questions.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| REDCap Variable Names                           | Some of the column names from the REDCap standard report are longer than 25 characters keeping them from uploading into SAS without a manual adjustment                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | - If possible, can we adjust these column names to be distinct at 25 characters or less?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Matching Data Between Various REDCap Versions   | Depending on how changes are implemented, we may need support from JHU to ensure data collected under different instruments is compatible to be used together in analysis                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | - What processes can we implement to ensure operability between versions?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Dyad IDs - Dropping Leading Zeros               | Some sites dropped the leading zero of the dyad id (1 vs. 01; The dyad id containing numbers and letters is a string/text field).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | - Madhu's suggestion is to have sites export and re-generate all records where this has occurred so the record id is correct (contains the leading zero). <br> <br> Note: This approach would require that after making these adjustments ALL REDCap instrument submissions would need to be resubmitted. We are open to suggestions for how to best handle this in REDCap as it seems that once a record id is set it cannot be updated.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Dyad IDs                                        | Currently, the dyad id column exports in REDCap instruments as “dyad_id” while it reads extracted schemas as “dyadid”.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | - If we can fix the formatting (as described above), can we rename these columns to match the extracted schemas for matching/merging?                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+# RedCap Instrument: Delivery Hospitalization
+
+## Extracted Instruments Involved in Site-Specific Variables (7):
+- Maternal Labor and Delivery
+- Newborn Labor and Delivery
+- NAS Complaints
+- Newborn ER Visits
+- Newborn Labs and Screenings
+- Newborn Readmissions
+- Medications at Delivery
+
+### Maternal Labor and Delivery Variables
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema   |
+|--------------------|--------------------------------------|--------------------------------------|
+| 550                | [nad_breech]                         | Breeched                             |
+| 551                | [nad_shoulder_dystocia]              | ShoulderDystocia                     |
+| 552                | [nad_abn_fetal_heart_rate]           | NonReassuringFHRT                    |
+| 553                | [nad_postpartum_hemorrhage]          | PostpartumHemorrhage                 |
+| 554                | [nad_placental_abruption]            | PlacentalAbruption                   |
+| 555                | [nad_mat_blood_transfusion]          | BloodTransfusion                     |
+| 556                | [nad_chorioamnionitis]               | Chorioamnionitis                     |
+| 557                | [nad_maternal_fever]                 | Fever                                |
+| 558                | [nad_nuchal_cord]                    | NuchalCord                           |
+| 559                | [nad_delivery_type_forcep]           | ForcepsAssisted                      |
+| 560                | [nad_delivery_type_vacuum]           | VacuumAssisted                       |
+| 561                | [nad_cesarean_indication]            | Cesarean                             |
+
+### Newborn Labor and Delivery Variables
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema   |
+|--------------------|--------------------------------------|--------------------------------------|
+| 548                | [nad_outcome_time]                   | TimeofBirth                          |
+| 573                | [nad_birth_head_circ]                | HeadCircumference                    |
+| 574                | [nad_birth_length]                   | BirthLength                          |
+| 575                | [nad_resuscitate]                    | MeasuresOccured                      |
+| 576                | [nad_resuscitation_room_in]          | MeasuresTakeInDr                     |
+| 577                | [nad_resuscitation_room_out]         | MeasuresTakenOutsideDr               |
+| 578                | [nad_newborn_death]                  | DiedBeforeDischarge                  |
+| 579                | [nad_date_death]                     | DateOfDeath                          |
+| 580                | [nad_autopsy_performed_yn]           | AutopsyPerformed                     |
+| 646                | [nad_feeding_method]                 | FeedingMethods                       |
+| 647                | [nad_breastfed_episodes]             | TotalMBMepisodes                     |
+| 648                | [nad_donor_breastmilk]               | TotalDBMEpisodes                     |
+| 649                | [nad_formula_episodes]               | TotalFormulaEpisodes                 |
+| 650                | [nad_rooming_in]                     | DaysRoomedIn                         |
+| 651                | [nad_delivery_dis_time]              | DischargeTime                        |
+| 652                | [nad_delivery_dis_nadir]             | NadirWeight                          |
+| 653                | [nad_discharge_dest]                 | DischargeDestination                 |
+| 654                | [nad_delivery_dis_dest_oth]          | OtherDischargeDestination            |
+| 655                | [nad_acf_dischargedate]              | DischargeDateFromACFacility          |
+| 656                | [nad_acf_status]                     | DischargeDestinationFromACFacili     |
+| 657                | [nad_acf_status_oth]                 | OtherDischargeDestinationFromACF     |
+
+### NAS Complaints Variables
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema   |
+|--------------------|--------------------------------------|--------------------------------------|
+| 634                | [nad_nas_cc_yn]                      | RecordContainsNASorNOWS              |
+| 635                | [nad_nas_cc_encounter]               | AssociatedEncounter                  |
+| 636                | [nad_nas_cc_encounter_oth]           | OtherEncounter                       |
+| 637                | [nad_nas_cc_date]                    | ComplaintDate                        |
+| 638                | [nad_nas_protocol]                   | NASProtocol                          |
+| 640                | [nad_nas_cc_yn_2]                    | RecordContainsNASorNOWS              |
+| 641                | [nad_nas_cc_encounter_2]             | AssociatedEncounter                  |
+| 642                | [nad_nas_cc_encounter_oth_2]         | OtherEncounter                       |
+| 643                | [nad_nas_cc_date_2]                  | ComplaintDate                        |
+| 644                | [nad_nas_protocol_2]                 | NASProtocol                          |
+| 645                | [nad_nas_cc_date_3]                  | SentHomeWithMedications              |
+
+### Newborn ER Visits
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema   |
+|--------------------|--------------------------------------|--------------------------------------|
+| 679                | [newborn_er_yn]                      | VisitedER                            |
+| 680                | [newborn_er_date]                    | DateOfVisit                          |
+| 682                | [newborn_er_yn_2]                    | VisitedER                            |
+| 683                | [newborn_er_date_2]                  | DateOfVisit                          |
+| 685                | [newborn_er_yn_3]                    | VisitedER                            |
+| 686                | [newborn_er_date_3]                  | DateOfVisit                          |
+| 688                | [newborn_er_yn_4]                    | VisitedER                            |
+| 689                | [newborn_er_date_4]                  | DateOfVisit                          |
+| 691                | [newborn_er_yn_5]                    | VisitedER                            |
+| 692                | [newborn_er_date_5]                  | DateOfVisit                          |
+
+### Newborn Labs & Screenings
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema   |
+|--------------------|--------------------------------------|--------------------------------------|
+| 612                | [nad_hypocalcemia]                   | HypocalcemiaOccured                  |
+| 613                | [nad_hypocalcemia_value]             | BloodCalciumLevel                    |
+| 630                | [nad_hypoglycemia]                   | HypoglycemiaOccured                  |
+| 631                | [nad_hypoglycemia_value]             | GlucoseLevel                         |
+| 693                | [newbornscreening_cchd]              | CCHDTestResult                       |
+| 694                | [newbornscreening_echo]              | CCHDEchoCardiogramResult             |
+
+### Newborn Readmissions
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema   |
+|--------------------|--------------------------------------|--------------------------------------|
+| 664                | [nad_readmitted_yn]                  | Readmitted                           |
+| 665                | [nad_readmission_date]               | ReadmissionDate                      |
+| 666                | [nad_readmit_discharge_date]         | ReadmissionDischargeDate             |
+| 667                | [nad_readmitted_yn_2]**              |                                      |
+| 668                | [nad_readmission_date_2]             | ReadmissionDate                      |
+| 669                | [nad_readmit_disc_date_2]            | ReadmissionDischargeDate             |
+| 670                | [nad_readmitted_yn_3]**              |                                      |
+| 671                | [nad_readmission_date_3]             | ReadmissionDate                      |
+| 672                | [nad_readmit_disc_date_3]            | ReadmissionDischargeDate             |
+| 673                | [nad_readmitted_yn_4]**              |                                      |
+| 674                | [nad_readmission_date_4]             | ReadmissionDate                      |
+| 675                | [nad_readmit_disc_date_4]            | ReadmissionDischargeDate             |
+| 676                | [nad_readmitted_yn_5]**              |                                      |
+| 677                | [nad_readmission_date_5]             | ReadmissionDate                      |
+| 678                | [nad_readmit_disc_date_5]            | ReadmissionDischargeDate             |
+
+**Only variable in a set that is not site-specific needs to be exported in standard report
+
+### Medications at Delivery
+
+| RC Variable Number | RedCap Data Field                    | Column Name(s) in Extracted Schema                   |
+|--------------------|--------------------------------------|------------------------------------------------------|
+| 566                | [nad_anesthesia_method]              | Maternal Delivery Medications not exact match        |
+| 567                | [nad_anesthesia_method_oth]          | Maternal Delivery Medications not exact match        |
+
+### Abstraction Only Variables
+
+| RC Variable Number | RedCap Data Field                    |
+|--------------------|--------------------------------------|
+| 547                | [nonlive_birth_yn]                   |
+| 549                | [nad_meconium]                       |
+| 562                | [nad_cesarean_ind_oth]               |
+| 563                | [nad_delivery_location]              |
+| 564                | [nad_delivery_location_oth]         
+
+ |
+| 565                | [nad_delivery_loc_trans_yn]          |
+| 568                | [nad_stepup_type]                    |
+| 569                | [nad_stepup_oth]                     |
+| 570                | [nad_stepup_reason]                  |
+| 571                | [nad_nicu_admission]                 |
+| 572                | [nad_nicu_discharge]                 |
+| 581                | [nad_cause_death]                    |
+| 582                | [nad_seizure]                        |
+| 583                | [nad_seizure_dt]                     |
+| 584                | [nad_seizure_desc]                   |
+| 585                | [nad_myoclonus]                      |
+| 586                | [nad_tremors]                        |
+| 587                | [nad_hmr]                            |
+| 588                | [nad_hypertonia]                     |
+| 589                | [nad_resp_distress]                  |
+| 590                | [nad_resp_distress_desc]             |
+| 591                | [nad_resp_distress_rds]              |
+| 592                | [nad_rds_verbatim]                   |
+| 593                | [nad_rds_surfactant]                 |
+| 594                | [nad_resp_distress_ttn]              |
+| 595                | [nad_resp_ttn_desc]                  |
+| 596                | [nad_resp_distress_pphn]             |
+| 597                | [nad_resp_pphn_desc]                 |
+| 598                | [nad_resp_distress_mas]              |
+| 599                | [nad_resp_mas_desc]                  |
+| 600                | [nad_resp_distress_apnea]            |
+| 601                | [nad_resp_apnea_desc]                |
+| 602                | [nad_sneezing]                       |
+| 603                | [nad_nasal_congestion]               |
+| 604                | [nad_yawning]                        |
+| 605                | [nad_fever]                          |
+| 606                | [nad_cutaneous_mottling]             |
+| 607                | [nad_high_pitched_cry]               |
+| 608                | [nad_poor_sleep]                     |
+| 609                | [nad_vomiting]                       |
+| 610                | [nad_poor_feeding]                   |
+| 611                | [nad_diarrhea]                       |
+| 614                | [nad_sepsis]                         |
+| 615                | [nad_intravent_hemorrhage]           |
+| 616                | [nad_intra_hemo_grade]               |
+| 617                | [nad_anemia]                         |
+| 618                | [nad_anemia_desc]                    |
+| 619                | [nad_hemolytic_disease]              |
+| 620                | [nad_jaundice]                       |
+| 621                | [nad_jaundice_desc]                  |
+| 622                | [nad_oxygen_req]                     |
+| 623                | [nad_oxygen_req_blowby]              |
+| 624                | [nad_oxygen_req_ventilator]          |
+| 625                | [nad_oxygen_req_vent_days]           |
+| 626                | [nad_oxygen_req_cpap]                |
+| 627                | [nad_asphyxia]                       |
+| 628                | [nad_ecmo]                           |
+| 629                | [nad_ecmo_days]                      |
+| 632                | [nad_birth_defects]                  |
+| 633                | [nad_birth_defects_desc]             |
+| 639                | [nas_cc_addl]                        |
+| 658                | [nad_discharge_care]                 |
+| 659                | [nad_discharge_care_oth]             |
+| 660                | [nad_cps_referral]                   |
+| 661                | [nad_safe_care_plan_yn]              |
+| 662                | [nad_pediatrician_yn]                |
+| 663                | [nad_social_worker_yn]               |
+
+### Structural Only Variables May Not Need in RedCap Table
+
+| RC Variable Number | RedCap Data Field                    |
+|--------------------|--------------------------------------|
+| 681                | [newborn_er_add]                     |
+| 684                | [newborn_er_add_2]                   |
+| 687                | [newborn_er_add_3]                   |
+| 690                | [newborn_er_add_4]                   |
+```
+
+
+
 ## This is the main REDCap training page: [REDCap Resources](https://projectredcap.org/resources/)
 From University of Colorado, below are excellent REDCap resources: [University of Colorado REDCap Resources](https://cctsi.cuanschutz.edu/resources/informatics/redcap-resources)
 
