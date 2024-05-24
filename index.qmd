@@ -4,6 +4,7 @@ date-modified: last-modified
 bibliography: references.bib
 ---
 
+#Welcome to the
 INTRO VIDEO, KHYZER AND PAUL
 
 DIAGRAM OF MATLINK program?
@@ -106,8 +107,8 @@ graph LR
 
   <div style="text-align: right"><a href="#table-of-contents">Back to Table of Contents</a></div>
 
-This needs to go further down.  First let's discuss vocabularies.
-## Welcome 
+
+## Welcome to OMOP for MATLINK users
 
 This site is designed to provide guidance, scripts and resources for sites transitioning data to OMOP common data model as part of MATLINK.
 
