@@ -425,6 +425,4 @@ Data Quality Dos and Don'ts
 
 [OHDSI on Azure GitHub](https://github.com/microsoft/OHDSIonAzure) Automation code and documentation for deploying OHDSI CDM in Azure
 
-[OHDSI/Perseus GitHub site](https://github.com/OHDSI/Perseus) OHDSI/Perseus on GitHub
-
 [How to develop capacity for observational research within a health system](https://www.ohdsi.org/2022showcase-79/) Presentation on building capacity from 2022 OHDSI Collaborator Showcase
