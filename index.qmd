@@ -362,26 +362,6 @@ The OHDSI open source software configured for deployment include:
 
 <https://github.com/OHDSI/DataQualityDashboard>
 
-# Best Practices
-
-Data Quality Dos and Don'ts
-
--   Do install the Data Quality Dashboard early on in the process.
-
--   Don't include source values in your export.- they might include PHI.
-
--   Don't forget to check GitHub for the most recent version of the script before you run it.
-
--   Don't send your data to the coordinating center until the tech team has a chance to review it with you in a live session.
-
-# Manuscripts
-
-[Heavner SF, Anderson W, Kashyap R, Dasher P, Mathé EA, Merson L, Guerin PJ, Weaver J, Robinson M, Schito M, Kumar VK, Nagy P. A Path to Real-World Evidence in Critical Care Using Open-Source Data Harmonization Tools. Crit Care Explor. 2023 Apr 3;5(4):e0893. doi: 10.1097/CCE.0000000000000893. PMID: 37025303; PMCID: PMC10072311.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10072311/pdf/cc9-5-e0893.pdf)
-
-# Webinars
-
-{{< video https://www.youtube.com/watch?v=H8Ur1xzVjS0 >}}
-
 # OMOP Scripts for Epic
 
 ["The Spectrum Code"](https://userweb.epic.com/User/788dbdff-6712-4b16-aabc-98cdb1be4ff9): scripts and documentation created by Roger Carlson at Corewell Health
