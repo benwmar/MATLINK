@@ -4,12 +4,15 @@ date-modified: last-modified
 bibliography: references.bib
 ---
 
-#Welcome to the
-INTRO VIDEO, KHYZER AND PAUL
+# Welcome
+## INTRO VIDEO, KHYZER AND PAUL:  NEED A PLACE TO STORE THE VIDEO -- TOO LARGE FOR GITHUB
 
-DIAGRAM OF MATLINK program?
+## DIAGRAM OF MATLINK program?
 
-CONTACT INFORMATION
+## Miele K, Kim SY, Jones R, et al. Medication for Opioid Use Disorder During Pregnancy — Maternal and Infant Network to Understand Outcomes Associated with Use of Medication for Opioid Use Disorder During Pregnancy (MAT-LINK), 2014–2021. MMWR Surveill Summ 2023;72(No. SS-3):1–14. [DOI: http://dx.doi.org/10.15585/mmwr.ss7203a1](http://dx.doi.org/10.15585/mmwr.ss7203a1). [https://www.cdc.gov/mmwr/volumes/72/ss/ss7203a1.htm](https://www.cdc.gov/mmwr/volumes/72/ss/ss7203a1.htm)
+
+## CONTACT INFORMATION:  roles and what they do
+## Meeting schedule
 
 # REdCAP Training Resouces
 
@@ -17,7 +20,7 @@ CONTACT INFORMATION
 Here is the content converted into GitHub Markdown:
 
 ```markdown
-# PILLARS IMPROVEMENT SUGGESTION DOCUMENT: REDCap Instruments (ALL) General Notes Updated 4/17/24
+# PILLARS IMPROVEMENT SUGGESTION DOCUMENT: REDCap Instruments (ALL) General Notes Updated 4/17/24  SEAN AND TERI:  I think we decided we don't want this on the public-facing trainings?
 
 ## Issue: Site-Specific Variable Collection
 
